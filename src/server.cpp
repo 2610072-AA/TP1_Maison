@@ -1,3 +1,4 @@
+#include "entrypoint.h"
 #ifndef WIN32_LEAN_AND_MEAN
 #define WIN32_LEAN_AND_MEAN
 #endif
@@ -18,7 +19,7 @@ SOCKET ListenSocket = INVALID_SOCKET;
 
 struct addrinfo *result = NULL, *ptr = NULL, hints;
 
-int main(int argc, char **argv) {
+int raylib_start(void) {
     int iResult;
 
     // Initialize Winsock

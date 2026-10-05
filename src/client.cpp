@@ -6,6 +6,8 @@
 #include <ws2tcpip.h>
 #include <iphlpapi.h>
 #include <stdio.h>
+#include <iostream>
+
 
 #pragma comment(lib, "Ws2_32.lib");
 #define DEFAULT_PORT "7099"
@@ -18,16 +20,21 @@ int iResult;
 
 // Initialize Winsock
 
-int main(int argc, char **argv)
+int raylib_start(void)
 {
+    // std::string choices[5] = {"GET","HEAD","PUT","DELETE","END PROCESS"};
+    // bool endProgram = false;
+    // while(endProgram){
+    //     std::print << "Available requests, and/or end the process" << std::endl;
 
+    // }
     iResult = WSAStartup(MAKEWORD(2, 2), &wsaData);
     if (iResult != 0)
     {
         printf("WSAStartup failed: %d\n", iResult);
         return 1;
     }
-
+    
     struct addrinfo *result = NULL,
                     *ptr = NULL,
                     hints;
