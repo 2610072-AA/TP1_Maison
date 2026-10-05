@@ -23,5 +23,6 @@
     ],
     "terminal.integrated.env.windows": {
         "PATH": "${workspaceFolder}/Tools/w64devkit/bin;${env:PATH}"
-    }
+    },
+    "cmake.sourceDirectory": "C:/Users/alfon/Documents/School/A26/Réseau/TP1_Maison/Libraries/raylib"
 }
