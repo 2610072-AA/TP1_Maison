@@ -141,8 +141,8 @@ int connectGetDom(std::string domain){
 
 }
 
-bool connectHeadDom(std::string domain){
-
+int connectHeadDom(std::string domain){
+    return 1;
 }
 bool connectD(){
     std::string domains[2] = {"example.com","kode.tech"};
@@ -160,11 +160,23 @@ bool connectD(){
                         afficheChoixGetHead();
                         std::cin >> choiceReq;
                         if (choiceReq == 1){
-                            connectGetDom(domains[0]);
+                            int valid = connectGetDom(domains[0]);
+                            if (valid == 0){
+                            std::cout << "Connection to " << domains[0] << " successful!" << std::endl;
+                        }
+                            else{
+                                std::cout << "Connection to " << domains[0] << " failed!" << std::endl;
+                            }
                             system("pause");
                         }
                         else if (choiceReq == 2){
-                            connectHeadDom(domains[0]);
+                            int valid = connectHeadDom(domains[0]);
+                            if (valid == 0){
+                                std::cout << "Connection to " << domains[0] << " successful!" << std::endl;
+                            }
+                            else{
+                                std::cout << "Connection to " << domains[0] << " failed!" << std::endl;
+                            }
                             system("pause");
                         }
                         break;
@@ -175,12 +187,24 @@ bool connectD(){
                     afficheChoixGetHead();
                     std::cin >> choiceReq;
                     if (choiceReq == 1){
-                        connectGetDom(domains[1]);
+                        int valid = connectGetDom(domains[1]);
+                        if (valid == 0){
+                            std::cout << "Connection to " << domains[1] << " successful!" << std::endl;
+                        }
+                        else{
+                            std::cout << "Connection to " << domains[1] << " failed!" << std::endl;
+                        }
                         system("pause");
                         
                     }
                     else if (choiceReq == 2){
-                        connectHeadDom(domains[1]);
+                        int valid = connectHeadDom(domains[1]);
+                        if (valid == 0){
+                            std::cout << "Connection to " << domains[1] << " successful!" << std::endl;
+                        }
+                        else{
+                            std::cout << "Connection to " << domains[1] << " failed!" << std::endl;
+                        }
                         system("pause");
                     }
                     break;
@@ -200,15 +224,15 @@ int get(){
 }
 
 int head(){
-
+    return 0;
 }
 
 int put(){
-
+    return 0;
 }
 
 int deletec(){
-
+    return 0;
 }
 
 int raylib_start(void)
