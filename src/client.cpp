@@ -15,10 +15,6 @@ WSADATA wsaData;
 SOCKET ConnectSocket = INVALID_SOCKET;
 
 
-
-// Initialize Winsock
-
-
 void affichage(){
     system("cls");
     std::cout << "Available requests, and/or end the process" << std::endl;

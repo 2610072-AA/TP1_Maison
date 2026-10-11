@@ -2,6 +2,22 @@
 #define NOB_STRIP_PREFIX
 #include "nob.h"
 
+
+// This is optionnal, will default to "build"
+// #define BUILD_FOLDER "path/to/build/folder"
+// This is optionnal, will default to "Libraries/raylib"
+// #define RAYLIB_PATH "./raylib"
+// The file will include the implementation by default, if making another noblib_*
+// that uses raylib(exemple: rlImGui) and needs it's includes and flags, do :
+// #define RAYLIB_NOIMPLEMENTATION 
+#include "noblib_raylib.c"
+
+#define LAB_NAME "serveur"
+#define EXE_NAME "server"
+
+#define LAB_NAME "serveur"
+#define EXE_NAME "server"
+
 #define RESEAU_LFLAGS "-lws2_32"
 int main(int argc, char** argv){
   NOB_GO_REBUILD_URSELF(argc, argv);
