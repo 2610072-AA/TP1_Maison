@@ -8,6 +8,10 @@
 #include <ws2tcpip.h>
 #include <iphlpapi.h>
 #include <stdio.h>
+#include <string>
+#include <fstream>
+#include <iostream>
+#include <filesystem>
 
 #pragma comment(lib, "Ws2_32.lib")
 WSADATA wsaData;
@@ -18,6 +22,16 @@ WSADATA wsaData;
 SOCKET ListenSocket = INVALID_SOCKET;
 
 struct addrinfo *result = NULL, *ptr = NULL, hints;
+
+const std::string HTTP_OK = "HTTP/1.1 200 OK\r\n";
+const std::string HTTP_CREATED = "HTTP/1.1 201 Created\r\n";
+const std::string HTTP_NO_CONTENT = "HTTP/1.1 204 No Content\r\n";
+const std::string HTTP_BAD_REQUEST = "HTTP/1.1 400 Bad Request\r\n";
+const std::string HTTP_FORBIDDEN = "HTTP/1.1 403 Forbidden\r\n";
+const std::string HTTP_METHOD_NOT_ALLOWED = "HTTP/1.1 405 Method Not Allowed\r\n";
+const std::string HTTP_CONTENT_TOO_LARGE = "HTTP/1.1 413 Payload Too Large\r\n";
+const std::string HTTP_INTERNAL_SERVER_ERROR = "HTTP/1.1 500 Internal Server Error\r\n";
+const std::string HTTP_NOT_IMPLEMENTED = "HTTP/1.1 501 Not Implemented\r\n";
 
 int raylib_start(void) {
     int iResult;
@@ -95,13 +109,36 @@ int raylib_start(void) {
 
     // Receive until the peer shuts down the connection
     do {
-
+    
         iResult = recv(ClientSocket, recvbuf, recvbuflen, 0);
+        
+        
         if (iResult > 0) {
             printf("Bytes received: %d\n", iResult);
+            std::string request(recvbuf, iResult);
+
+            std::string response;
+            if (request.find("GET") == 0) {
+                response = HTTP_OK;
+                response += "Content-Length: 0\r\n";
+                response += "Connection: close\r\n";
+                response += "\r\n";
+                
+            }
+            
+            else if (request.find("HEAD ") == 0) {
+                printf("Method: HEAD\n");
+            }
+            else if (request.find("PUT ") == 0) {
+                printf("Method: PUT\n");
+            }
+            else if (request.find("DELETE ") == 0) {
+                printf("Method: DELETE\n");
+            }
+
 
             // Echo the buffer back to the sender
-            iSendResult = send(ClientSocket, recvbuf, iResult, 0);
+            iSendResult = send(ClientSocket, response.c_str(), (int)response.length(), 0);
             if (iSendResult == SOCKET_ERROR) {
                 printf("send failed: %d\n", WSAGetLastError());
                 closesocket(ClientSocket);

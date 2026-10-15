@@ -22,8 +22,8 @@ Pour que la compilation fonctionne, vous devez modifier cette ligne dans `nob.c`
 ```
 
 
-
-g++ src/client.cpp -o client.exe -lws2_32 (Pour recompiler)
+g++ -ggdb3 .\src\main.cpp .\src\client.cpp -o .\Deployment\client.exe -lws2_32 (Pour recompiler)
+.\Deployment\client.exe (pour lancer)
 
 Référence pour l'école: https://share.gemini.google/lFsZqgOkpSUv
 
